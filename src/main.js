@@ -27,7 +27,7 @@ const rander = () => {
         </li>`).insertBefore($last)
 
         $('.icon-wrapper').on('error',(xxx)=>{
-            xxx.target.src = 'http://www.baidu.com/favicon.ico'
+            xxx.target.src = '../27-pig.png'
         })
         $li.on('click', () => {
             window.open(node.url)

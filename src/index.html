@@ -1,0 +1,44 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>轻导航</title>
+    <style type="text/css">
+        .icon {
+            width: 1em; height: 1em;
+            vertical-align: -0.15em;
+            fill: currentColor;
+            overflow: hidden;
+        }
+    </style>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+<header class="header">
+    <form class="search" method="get" action="https://www.baidu.com/s" target="_self">
+        <input name="wd" type="text">
+        <button type="submit">搜索</button>
+    </form>
+</header>
+<main class="main">
+    <ul class="siteList">
+        <li class="last site">
+            <div class="addButton">
+                <div class="icon-wrapper">
+                    <svg class="icon" aria-hidden="true">
+                        <use xlink:href="#icon-zengjia"></use>
+                    </svg>
+                </div>
+                <div class="text">新增网站</div>
+            </div>
+        </li>
+    </ul>
+</main>
+<script src="https://at.alicdn.com/t/font_2364636_sccty4rrytg.js"></script>
+<script src="https://cdn.bootcdn.net/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script src="main.js"></script>
+</body>
+</html>

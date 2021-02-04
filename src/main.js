@@ -48,12 +48,9 @@ const rander = () => {
         const $site = $('.site')
         $site.on({
             touchstart(e) {
-                setTimeout(() => {
+                timeOutEvent = setTimeout(() => {
                     if (e.target.lastChild) e.target.lastChild.style.display = 'block'
                 }, 500)
-            },
-            touchend() {
-                clearTimeout(timeOutEvent)
             },
             touchmove() {
                 clearTimeout(timeOutEvent)

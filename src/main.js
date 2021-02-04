@@ -48,6 +48,7 @@ const rander = () => {
         const $site = $('.site')
         $site.on({
             touchstart(e) {
+                e.target.preventDefault()
                 setTimeout(() => {
                     if (e.target.lastChild) e.target.lastChild.style.display = 'block'
                 }, 500)

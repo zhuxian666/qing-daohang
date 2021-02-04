@@ -149,7 +149,7 @@ var rander = function rander() {
   $siteList.find(".site:not(.last)").remove();
   hash.forEach(function (node, index) {
     var iconSrc = "".concat(node.url + "/favicon.ico");
-    var $li = $("<li class=\"site\">\n            <div class=\"icon-wrapper\">".concat(node.logo, "</div>\n            <svg class=\"icon close\" aria-hidden=\"true\">\n                    <use xlink:href=\"#icon-shanchu\"></use>\n                </svg>\n            <div class=\"link\">").concat(simplifyUrl(node.url), "</div>\n            </li>")).insertBefore($last);
+    var $li = $("<li class=\"site\">\n            <div class=\"icon-wrapper\">".concat(node.logo, "</div>\n            <div class=\"link\">").concat(simplifyUrl(node.url), "</div>\n            <svg class=\"icon close\" aria-hidden=\"true\">\n            <use xlink:href=\"#icon-shanchu\"></use>\n        </svg></li>")).insertBefore($last);
     $li.find('.icon-wrapper').addClass("".concat(simplifyUrl(node.url)));
     var $img = $("<img class=\"icon-wrapper\" src=\"".concat(iconSrc, "\"/>"));
     $img.on('load', function () {
@@ -165,16 +165,16 @@ var rander = function rander() {
       localStorage.setItem('hash', JSON.stringify(hash));
       rander();
     });
-    var $site = $('site');
     var event;
-    $site.on({
+    $li.on({
       touchstart: function touchstart(e) {
+        console.log(1);
         event = e.target.lastChild;
         timeOutEvent = setTimeout(function () {
           if (event) {
             event.style.display = 'block';
           }
-        }, 1000);
+        }, 800);
       },
       touchmove: function touchmove() {
         clearTimeout(timeOutEvent);
@@ -211,4 +211,4 @@ window.onbeforeunload = function () {
   localStorage.setItem("hash", JSON.stringify(hash));
 };
 },{}]},{},["epB2"], null)
-//# sourceMappingURL=main.51f941e1.js.map
+//# sourceMappingURL=main.1938ec31.js.map

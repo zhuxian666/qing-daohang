@@ -23,11 +23,11 @@ const rander = () => {
     let iconSrc = `${node.url + "/favicon.ico"}`;
     const $li = $(`<li class="site">
             <div class="icon-wrapper">${node.logo}</div>
-            <svg class="icon close" aria-hidden="true">
-                    <use xlink:href="#icon-shanchu"></use>
-                </svg>
             <div class="link">${simplifyUrl(node.url)}</div>
-            </li>`).insertBefore($last)
+            <svg class="icon close" aria-hidden="true">
+            <use xlink:href="#icon-shanchu"></use>
+        </svg></li>`)
+            .insertBefore($last)
         $li.find('.icon-wrapper').addClass(`${simplifyUrl(node.url)}`)
         const $img = $(`<img class="icon-wrapper" src="${iconSrc}"/>`)
         $img.on('load', () => {
@@ -44,16 +44,16 @@ const rander = () => {
           localStorage.setItem('hash', JSON.stringify(hash))
           rander()
       })
-        const $site = $('site')
         let event
-        $site.on({
+        $li.on({
             touchstart(e) {
+                console.log(1);
                 event = e.target.lastChild
                 timeOutEvent = setTimeout(() => {
                     if (event){
                         event.style.display = 'block'
                     }
-                }, 1000)
+                }, 800)
             },
             touchmove() {
                 clearTimeout(timeOutEvent)

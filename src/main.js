@@ -36,10 +36,14 @@ const rander = () => {
         })
         let timeOutEvent
         const $site = $('.site')
+        let event
         $site.on({
             touchstart(e) {
+                event = e.target.lastChild
                 timeOutEvent = setTimeout(() => {
-                    if (e.target.lastChild) e.target.lastChild.style.display = 'block'
+                    if (event){
+                        event.style.display = 'block'
+                    }
                 }, 1200)
             },
             touchmove() {
@@ -47,7 +51,7 @@ const rander = () => {
             }
         })
         $(document).on("click", () => {
-            $li.find(".close").css("display", "none");
+            event.style.display = 'none'
         });
         $li.on('click', () => {
             window.open(node.url)
@@ -62,9 +66,9 @@ const rander = () => {
         
     })
 }
-rander()
-
-
+window.onload=()=>{
+    rander()
+}
 $('.addButton').on('click', () => {
     let url = window.prompt('请输入要添加的网址')
     if (url && url.indexOf('http') !== 0) {

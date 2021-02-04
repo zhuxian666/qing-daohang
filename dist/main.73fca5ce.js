@@ -158,10 +158,14 @@ var rander = function rander() {
     });
     var timeOutEvent;
     var $site = $('.site');
+    var event;
     $site.on({
       touchstart: function touchstart(e) {
+        event = e.target.lastChild;
         timeOutEvent = setTimeout(function () {
-          if (e.target.lastChild) e.target.lastChild.style.display = 'block';
+          if (event) {
+            event.style.display = 'block';
+          }
         }, 1200);
       },
       touchmove: function touchmove() {
@@ -169,7 +173,7 @@ var rander = function rander() {
       }
     });
     $(document).on("click", function () {
-      $li.find(".close").css("display", "none");
+      event.style.display = 'none';
     });
     $li.on('click', function () {
       window.open(node.url);
@@ -183,7 +187,10 @@ var rander = function rander() {
   });
 };
 
-rander();
+window.onload = function () {
+  rander();
+};
+
 $('.addButton').on('click', function () {
   var url = window.prompt('请输入要添加的网址');
 
@@ -205,4 +212,4 @@ window.onbeforeunload = function () {
   localStorage.setItem('hash', JSON.stringify(hash));
 };
 },{}]},{},["epB2"], null)
-//# sourceMappingURL=main.974f52f3.js.map
+//# sourceMappingURL=main.73fca5ce.js.map

@@ -50,7 +50,7 @@ const rander = () => {
             touchstart(e) {
                 timeOutEvent = setTimeout(() => {
                     if (e.target.lastChild) e.target.lastChild.style.display = 'block'
-                }, 500)
+                }, 1200)
             },
             touchmove() {
                 clearTimeout(timeOutEvent)

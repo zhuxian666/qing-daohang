@@ -120,8 +120,8 @@ parcelRequire = (function (modules, cache, entry, globalName) {
 })({"epB2":[function(require,module,exports) {
 var $last = $('.last');
 var $siteList = $('.siteList');
-var str = JSON.parse(localStorage.getItem('hash'));
-var hash = str || [{
+var getStr = JSON.parse(localStorage.getItem('hash'));
+var hash = getStr || [{
   logo: 'B',
   url: 'https://www.bilibili.com'
 }, {
@@ -163,6 +163,7 @@ var rander = function rander() {
       console.log(1);
       e.stopPropagation();
       hash.splice(index, 1);
+      localStorage.setItem('hash', JSON.stringify(hash));
       rander();
     });
   });
@@ -181,13 +182,13 @@ $('.addButton').on('click', function () {
       logo: simplifyUrl(url)[0].toUpperCase(),
       url: url
     });
+    localStorage.setItem('hash', JSON.stringify(hash));
     rander();
   }
 });
 
 window.onbeforeunload = function () {
-  var string = JSON.stringify(hash);
-  localStorage.setItem('hash', string);
+  localStorage.setItem('hash', JSON.stringify(hash));
 };
 },{}]},{},["epB2"], null)
-//# sourceMappingURL=main.cb3fff90.js.map
+//# sourceMappingURL=main.fd08edce.js.map

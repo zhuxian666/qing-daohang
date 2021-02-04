@@ -1,7 +1,7 @@
 const $last = $('.last')
 const $siteList = $('.siteList')
-const str = JSON.parse(localStorage.getItem('hash'))
-const hash = str || [
+const getStr = JSON.parse(localStorage.getItem('hash'))
+const hash = getStr || [
     {logo: 'B', url: 'https://www.bilibili.com'},
     {logo: 'W', url: 'https://www.weibo.com'},
     {logo: 'D', url: 'https://www.douyu.com'},
@@ -42,6 +42,7 @@ const rander = () => {
             console.log(1);
             e.stopPropagation()
             hash.splice(index, 1)
+            localStorage.setItem('hash', JSON.stringify(hash))
             rander()
         })
     })
@@ -58,12 +59,13 @@ $('.addButton').on('click', () => {
             logo: simplifyUrl(url)[0].toUpperCase(),
             url: url
         })
+        localStorage.setItem('hash', JSON.stringify(hash))
         rander()
     }
 })
+
 window.onbeforeunload = () => {
-    const string = JSON.stringify(hash)
-    localStorage.setItem('hash', string)
+    localStorage.setItem('hash', JSON.stringify(hash))
 }
 
 

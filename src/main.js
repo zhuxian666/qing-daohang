@@ -33,25 +33,6 @@ const rander = () => {
             const $removeClass = $('.site').find(`${'.' + simplifyUrl(iconSrc)}`)
             $removeClass.replaceWith($img)
         })
-        
-        // const $site = $('site')
-        // let event
-        // $site.on({
-        //     touchstart(e) {
-        //         event = e.target.lastChild
-        //         timeOutEvent = setTimeout(() => {
-        //             if (event){
-        //                 event.style.display = 'block'
-        //             }
-        //         }, 1000)
-        //     },
-        //     touchmove() {
-        //         clearTimeout(timeOutEvent)
-        //     }, 
-        // })
-        // $(document).on("click", () => {
-        //     if(event)event.style.display = 'none'
-        // });
         $li.on('click', () => {
             window.open(node.url)
         })

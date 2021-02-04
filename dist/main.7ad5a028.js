@@ -169,7 +169,6 @@ var rander = function rander() {
     var $site = $('.site');
     $site.on({
       touchstart: function touchstart(e) {
-        e.target.preventDefault();
         setTimeout(function () {
           if (e.target.lastChild) e.target.lastChild.style.display = 'block';
         }, 500);
@@ -209,4 +208,4 @@ window.onbeforeunload = function () {
   localStorage.setItem('hash', JSON.stringify(hash));
 };
 },{}]},{},["epB2"], null)
-//# sourceMappingURL=main.e9176e43.js.map
+//# sourceMappingURL=main.7ad5a028.js.map

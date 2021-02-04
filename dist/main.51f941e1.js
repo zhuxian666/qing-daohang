@@ -118,38 +118,38 @@ parcelRequire = (function (modules, cache, entry, globalName) {
 
   return newRequire;
 })({"epB2":[function(require,module,exports) {
-var $last = $('.last');
-var $siteList = $('.siteList');
-var getStr = JSON.parse(localStorage.getItem('hash'));
+var $last = $(".last");
+var $siteList = $(".siteList");
+var getStr = JSON.parse(localStorage.getItem("hash"));
 var hash = getStr || [{
-  logo: 'B',
-  url: 'https://www.bilibili.com'
+  logo: "B",
+  url: "https://www.bilibili.com"
 }, {
-  logo: 'W',
-  url: 'https://www.weibo.com'
+  logo: "W",
+  url: "https://www.weibo.com"
 }, {
-  logo: 'D',
-  url: 'https://www.douyu.com'
+  logo: "D",
+  url: "https://www.douyu.com"
 }, {
-  logo: 'Z',
-  url: 'https://www.zhihu.com/'
+  logo: "Z",
+  url: "https://www.zhihu.com/"
 }, {
-  logo: 'X',
-  url: 'https://www.ximalaya.com/'
+  logo: "X",
+  url: "https://www.ximalaya.com/"
 }, {
-  logo: 'G',
-  url: 'https://github.com/'
+  logo: "G",
+  url: "https://github.com/"
 }];
 
 var simplifyUrl = function simplifyUrl(url) {
-  return url.replace('https://', '').replace('http://', '').replace('www.', '').replace(/\/.*/, '').replace('.com', '');
+  return url.replace("https://", "").replace("http://", "").replace("www.", "").replace(/\/.*/, "").replace(".com", "");
 };
 
 var rander = function rander() {
-  $siteList.find('.site:not(.last)').remove();
+  $siteList.find(".site:not(.last)").remove();
   hash.forEach(function (node, index) {
-    var iconSrc = "".concat(node.url + '/favicon.ico');
-    var $li = $("<li class=\"site\">\n            <div class=\"icon-wrapper\">".concat(node.logo, "</div>\n            <div class=\"link\">").concat(simplifyUrl(node.url), "</div>\n            <svg class=\"icon close\" aria-hidden=\"true\">\n                    <use xlink:href=\"#icon-shanchu\"></use>\n                </svg></li>")).insertBefore($last);
+    var iconSrc = "".concat(node.url + "/favicon.ico");
+    var $li = $("<li class=\"site\">\n            <div class=\"icon-wrapper\">".concat(node.logo, "</div>\n            <svg class=\"icon close\" aria-hidden=\"true\">\n                    <use xlink:href=\"#icon-shanchu\"></use>\n                </svg>\n            <div class=\"link\">").concat(simplifyUrl(node.url), "</div>\n            </li>")).insertBefore($last);
     $li.find('.icon-wrapper').addClass("".concat(simplifyUrl(node.url)));
     var $img = $("<img class=\"icon-wrapper\" src=\"".concat(iconSrc, "\"/>"));
     $img.on('load', function () {
@@ -164,6 +164,24 @@ var rander = function rander() {
       hash.splice(index, 1);
       localStorage.setItem('hash', JSON.stringify(hash));
       rander();
+    });
+    var $site = $('site');
+    var event;
+    $site.on({
+      touchstart: function touchstart(e) {
+        event = e.target.lastChild;
+        timeOutEvent = setTimeout(function () {
+          if (event) {
+            event.style.display = 'block';
+          }
+        }, 1000);
+      },
+      touchmove: function touchmove() {
+        clearTimeout(timeOutEvent);
+      }
+    });
+    $(document).on("click", function () {
+      if (event) event.style.display = 'none';
     });
   });
 };
@@ -190,7 +208,7 @@ $('.addButton').on('click', function () {
 });
 
 window.onbeforeunload = function () {
-  localStorage.setItem('hash', JSON.stringify(hash));
+  localStorage.setItem("hash", JSON.stringify(hash));
 };
 },{}]},{},["epB2"], null)
-//# sourceMappingURL=main.58edbea3.js.map
+//# sourceMappingURL=main.51f941e1.js.map

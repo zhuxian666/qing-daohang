@@ -1,27 +1,27 @@
-const $last = $('.last')
-const $siteList = $('.siteList')
-const getStr = JSON.parse(localStorage.getItem('hash'))
+const $last = $(".last");
+const $siteList = $(".siteList");
+const getStr = JSON.parse(localStorage.getItem("hash"));
 const hash = getStr || [
-    {logo: 'B', url: 'https://www.bilibili.com'},
-    {logo: 'W', url: 'https://www.weibo.com'},
-    {logo: 'D', url: 'https://www.douyu.com'},
-    {logo: 'Z', url: 'https://www.zhihu.com/'},
-    {logo: 'X', url: 'https://www.ximalaya.com/'},
-    {logo: 'G', url: 'https://github.com/'},
-
-]
+  { logo: "B", url: "https://www.bilibili.com" },
+  { logo: "W", url: "https://www.weibo.com" },
+  { logo: "D", url: "https://www.douyu.com" },
+  { logo: "Z", url: "https://www.zhihu.com/" },
+  { logo: "X", url: "https://www.ximalaya.com/" },
+  { logo: "G", url: "https://github.com/" },
+];
 const simplifyUrl = (url) => {
-    return url.replace('https://', '')
-        .replace('http://', '')
-        .replace('www.', '')
-        .replace(/\/.*/, '')
-        .replace('.com', '')
-}
+  return url
+    .replace("https://", "")
+    .replace("http://", "")
+    .replace("www.", "")
+    .replace(/\/.*/, "")
+    .replace(".com", "");
+};
 const rander = () => {
-    $siteList.find('.site:not(.last)').remove()
-    hash.forEach((node, index) => {
-        let iconSrc = `${node.url + '/favicon.ico'}`
-        const $li = $(`<li class="site">
+  $siteList.find(".site:not(.last)").remove();
+  hash.forEach((node, index) => {
+    let iconSrc = `${node.url + "/favicon.ico"}`;
+    const $li = $(`<li class="site">
             <div class="icon-wrapper">${node.logo}</div>
             <svg class="icon close" aria-hidden="true">
                     <use xlink:href="#icon-shanchu"></use>
@@ -84,10 +84,5 @@ $('.addButton').on('click', () => {
 })
 
 window.onbeforeunload = () => {
-    localStorage.setItem('hash', JSON.stringify(hash))
-}
-
-
-
-
-
+  localStorage.setItem("hash", JSON.stringify(hash));
+};

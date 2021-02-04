@@ -155,25 +155,7 @@ var rander = function rander() {
     $img.on('load', function () {
       var $removeClass = $('.site').find("".concat('.' + simplifyUrl(iconSrc)));
       $removeClass.replaceWith($img);
-    }); // const $site = $('site')
-    // let event
-    // $site.on({
-    //     touchstart(e) {
-    //         event = e.target.lastChild
-    //         timeOutEvent = setTimeout(() => {
-    //             if (event){
-    //                 event.style.display = 'block'
-    //             }
-    //         }, 1000)
-    //     },
-    //     touchmove() {
-    //         clearTimeout(timeOutEvent)
-    //     }, 
-    // })
-    // $(document).on("click", () => {
-    //     if(event)event.style.display = 'none'
-    // });
-
+    });
     $li.on('click', function () {
       window.open(node.url);
     });
@@ -211,4 +193,4 @@ window.onbeforeunload = function () {
   localStorage.setItem('hash', JSON.stringify(hash));
 };
 },{}]},{},["epB2"], null)
-//# sourceMappingURL=main.33536844.js.map
+//# sourceMappingURL=main.58edbea3.js.map

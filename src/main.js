@@ -2,85 +2,69 @@ const $last = $('.last')
 const $siteList = $('.siteList')
 const str = JSON.parse(localStorage.getItem('hash'))
 const hash = str || [
-    {logo: 'A', url: 'https://www.acfun.cn'},
     {logo: 'B', url: 'https://www.bilibili.com'},
     {logo: 'W', url: 'https://www.weibo.com'},
     {logo: 'D', url: 'https://www.douyu.com'},
-    {logo: 'T', url: 'https://www.taobao.com'},
-    {logo: 'B', url: 'https://www.baidu.com'}
+    {logo: 'Z', url: 'https://www.zhihu.com/'},
+    {logo: 'X', url: 'https://www.ximalaya.com/'},
+    {logo: 'G', url: 'https://github.com/'},
+
 ]
 const simplifyUrl = (url) => {
     return url.replace('https://', '')
         .replace('http://', '')
         .replace('www.', '')
+        .replace(/\/.*/, '')
+        .replace('.com', '')
 }
 const rander = () => {
     $siteList.find('.site:not(.last)').remove()
     hash.forEach((node, index) => {
         let iconSrc = `${node.url + '/favicon.ico'}`
         const $li = $(`<li class="site">
-            <img class="icon-wrapper" src="${iconSrc}"/>
+            <div class="icon-wrapper">${node.logo}</div>
             <div class="link">${simplifyUrl(node.url)}</div>
             <svg class="icon close" aria-hidden="true">
                     <use xlink:href="#icon-shanchu"></use>
                 </svg>
         </li>`).insertBefore($last)
+            $li.find('.icon-wrapper').addClass(`${simplifyUrl(node.url)}`)
 
-        $('.icon-wrapper').on('error',(xxx)=>{
-            xxx.target.src = '../27-pig.png'
+        const $img = $(`<img class="icon-wrapper" src="${iconSrc}"/>`)
+        $img.on('load', () =>{
+            const $removeClass = $('.site').find(`${'.'+simplifyUrl(iconSrc)}`)
+            $removeClass.replaceWith($img)
         })
         $li.on('click', () => {
             window.open(node.url)
         })
         $li.on('click', '.close', (e) => {
+            console.log(1);
             e.stopPropagation()
             hash.splice(index, 1)
             rander()
         })
     })
 }
-// http://www.baidu.com/favicon.ico
 rander()
 
 $('.addButton').on('click', () => {
     let url = window.prompt('请输入要添加的网址')
-    if (url.indexOf('http') !== 0) {
-        url = 'https://www.' + url
+    if (url && url.indexOf('http') !== 0) {
+        url = 'https://' + url
     }
-    hash.push({
-        logo: simplifyUrl(url)[0].toUpperCase(),
-        url: url
-    })
-    rander()
+    if (url) {
+        hash.push({
+            logo: simplifyUrl(url)[0].toUpperCase(),
+            url: url
+        })
+        rander()
+    }
 })
-window.onbeforeunload=()=>{
+window.onbeforeunload = () => {
     const string = JSON.stringify(hash)
-    localStorage.setItem('hash',string)
+    localStorage.setItem('hash', string)
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 

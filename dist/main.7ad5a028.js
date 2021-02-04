@@ -149,7 +149,7 @@ var rander = function rander() {
   $siteList.find('.site:not(.last)').remove();
   hash.forEach(function (node, index) {
     var iconSrc = "".concat(node.url + '/favicon.ico');
-    var $li = $("<li class=\"site\">\n            <div class=\"icon-wrapper\">".concat(node.logo, "</div>\n            <div class=\"link\">").concat(simplifyUrl(node.url), "</div>\n            <svg class=\"icon close\" aria-hidden=\"true\">\n                    <use xlink:href=\"#icon-shanchu\"></use>\n                </svg>\n        </li>")).insertBefore($last);
+    var $li = $("<li class=\"site\">\n            <div class=\"icon-wrapper\">".concat(node.logo, "</div>\n            <div class=\"link\">").concat(simplifyUrl(node.url), "</div>\n            <svg class=\"icon close\" aria-hidden=\"true\">\n                    <use xlink:href=\"#icon-shanchu\"></use>\n                </svg></li>")).insertBefore($last);
     $li.find('.icon-wrapper').addClass("".concat(simplifyUrl(node.url)));
     var $img = $("<img class=\"icon-wrapper\" src=\"".concat(iconSrc, "\"/>"));
     $img.on('load', function () {
@@ -160,11 +160,28 @@ var rander = function rander() {
       window.open(node.url);
     });
     $li.on('click', '.close', function (e) {
-      console.log(1);
       e.stopPropagation();
       hash.splice(index, 1);
       localStorage.setItem('hash', JSON.stringify(hash));
       rander();
+    });
+    var timeOutEvent;
+    var $site = $('.site');
+    $site.on({
+      touchstart: function touchstart(e) {
+        setTimeout(function () {
+          if (e.target.lastChild) e.target.lastChild.style.display = 'block';
+        }, 500);
+      },
+      touchend: function touchend() {
+        clearTimeout(timeOutEvent);
+      },
+      touchmove: function touchmove() {
+        clearTimeout(timeOutEvent);
+      }
+    });
+    $(document).on("click", function () {
+      $li.find(".close").css("display", "none");
     });
   });
 };
@@ -191,4 +208,4 @@ window.onbeforeunload = function () {
   localStorage.setItem('hash', JSON.stringify(hash));
 };
 },{}]},{},["epB2"], null)
-//# sourceMappingURL=main.fd08edce.js.map
+//# sourceMappingURL=main.7ad5a028.js.map

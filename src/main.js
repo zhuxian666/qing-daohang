@@ -26,28 +26,46 @@ const rander = () => {
             <div class="link">${simplifyUrl(node.url)}</div>
             <svg class="icon close" aria-hidden="true">
                     <use xlink:href="#icon-shanchu"></use>
-                </svg>
-        </li>`).insertBefore($last)
-            $li.find('.icon-wrapper').addClass(`${simplifyUrl(node.url)}`)
+                </svg></li>`).insertBefore($last)
+        $li.find('.icon-wrapper').addClass(`${simplifyUrl(node.url)}`)
 
         const $img = $(`<img class="icon-wrapper" src="${iconSrc}"/>`)
-        $img.on('load', () =>{
-            const $removeClass = $('.site').find(`${'.'+simplifyUrl(iconSrc)}`)
+        $img.on('load', () => {
+            const $removeClass = $('.site').find(`${'.' + simplifyUrl(iconSrc)}`)
             $removeClass.replaceWith($img)
         })
         $li.on('click', () => {
             window.open(node.url)
         })
         $li.on('click', '.close', (e) => {
-            console.log(1);
             e.stopPropagation()
             hash.splice(index, 1)
             localStorage.setItem('hash', JSON.stringify(hash))
             rander()
         })
+
+        let timeOutEvent
+        const $site = $('.site')
+        $site.on({
+            touchstart(e) {
+                setTimeout(() => {
+                    if (e.target.lastChild) e.target.lastChild.style.display = 'block'
+                }, 500)
+            },
+            touchend() {
+                clearTimeout(timeOutEvent)
+            },
+            touchmove() {
+                clearTimeout(timeOutEvent)
+            }
+        })
+        $(document).on("click", () => {
+            $li.find(".close").css("display", "none");
+        });
     })
 }
 rander()
+
 
 $('.addButton').on('click', () => {
     let url = window.prompt('请输入要添加的网址')

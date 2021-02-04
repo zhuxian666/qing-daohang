@@ -20,9 +20,7 @@ ul, ol {
     -ms-user-select: none;
     user-select: none;
 }
-
-input,
-textarea {
+input{
     -webkit-user-select: auto;
 }
 
@@ -112,7 +110,7 @@ body {
 @media (min-width: 565px) {
     .siteList {
         margin-left: 0;
-        margin-right: -29px;
+        margin-right: -25px;
         justify-content: flex-start;
     }
 }
@@ -140,7 +138,11 @@ body {
     position: relative;
     cursor: pointer;
 }
-
+@media (max-width: 385px) {
+    .siteList .site{
+        width: 100px;
+    }
+}
 .siteList .site .link {
     font-size: 14px;
     margin-top: 4px;

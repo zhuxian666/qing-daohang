@@ -28,31 +28,30 @@ const rander = () => {
                     <use xlink:href="#icon-shanchu"></use>
                 </svg></li>`).insertBefore($last)
         $li.find('.icon-wrapper').addClass(`${simplifyUrl(node.url)}`)
-
         const $img = $(`<img class="icon-wrapper" src="${iconSrc}"/>`)
         $img.on('load', () => {
             const $removeClass = $('.site').find(`${'.' + simplifyUrl(iconSrc)}`)
             $removeClass.replaceWith($img)
         })
-        let timeOutEvent
-        const $site = $('.site')
-        let event
-        $site.on({
-            touchstart(e) {
-                event = e.target.lastChild
-                timeOutEvent = setTimeout(() => {
-                    if (event){
-                        event.style.display = 'block'
-                    }
-                }, 1200)
-            },
-            touchmove() {
-                clearTimeout(timeOutEvent)
-            }
-        })
-        $(document).on("click", () => {
-            event.style.display = 'none'
-        });
+        
+        // const $site = $('site')
+        // let event
+        // $site.on({
+        //     touchstart(e) {
+        //         event = e.target.lastChild
+        //         timeOutEvent = setTimeout(() => {
+        //             if (event){
+        //                 event.style.display = 'block'
+        //             }
+        //         }, 1000)
+        //     },
+        //     touchmove() {
+        //         clearTimeout(timeOutEvent)
+        //     }, 
+        // })
+        // $(document).on("click", () => {
+        //     if(event)event.style.display = 'none'
+        // });
         $li.on('click', () => {
             window.open(node.url)
         })
@@ -62,8 +61,6 @@ const rander = () => {
             localStorage.setItem('hash', JSON.stringify(hash))
             rander()
         })
-
-        
     })
 }
 window.onload=()=>{

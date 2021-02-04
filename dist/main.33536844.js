@@ -155,26 +155,25 @@ var rander = function rander() {
     $img.on('load', function () {
       var $removeClass = $('.site').find("".concat('.' + simplifyUrl(iconSrc)));
       $removeClass.replaceWith($img);
-    });
-    var timeOutEvent;
-    var $site = $('.site');
-    var event;
-    $site.on({
-      touchstart: function touchstart(e) {
-        event = e.target.lastChild;
-        timeOutEvent = setTimeout(function () {
-          if (event) {
-            event.style.display = 'block';
-          }
-        }, 1200);
-      },
-      touchmove: function touchmove() {
-        clearTimeout(timeOutEvent);
-      }
-    });
-    $(document).on("click", function () {
-      event.style.display = 'none';
-    });
+    }); // const $site = $('site')
+    // let event
+    // $site.on({
+    //     touchstart(e) {
+    //         event = e.target.lastChild
+    //         timeOutEvent = setTimeout(() => {
+    //             if (event){
+    //                 event.style.display = 'block'
+    //             }
+    //         }, 1000)
+    //     },
+    //     touchmove() {
+    //         clearTimeout(timeOutEvent)
+    //     }, 
+    // })
+    // $(document).on("click", () => {
+    //     if(event)event.style.display = 'none'
+    // });
+
     $li.on('click', function () {
       window.open(node.url);
     });
@@ -212,4 +211,4 @@ window.onbeforeunload = function () {
   localStorage.setItem('hash', JSON.stringify(hash));
 };
 },{}]},{},["epB2"], null)
-//# sourceMappingURL=main.73fca5ce.js.map
+//# sourceMappingURL=main.33536844.js.map

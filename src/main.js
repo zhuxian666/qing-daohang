@@ -23,46 +23,48 @@ const rander = () => {
         let iconSrc = `${node.url + '/favicon.ico'}`
         const $li = $(`<li class="site">
             <div class="icon-wrapper">${node.logo}</div>
-            <div class="link">${simplifyUrl(node.url)}</div>
             <svg class="icon close" aria-hidden="true">
                     <use xlink:href="#icon-shanchu"></use>
-                </svg></li>`).insertBefore($last)
+                </svg>
+            <div class="link">${simplifyUrl(node.url)}</div>
+            </li>`).insertBefore($last)
         $li.find('.icon-wrapper').addClass(`${simplifyUrl(node.url)}`)
         const $img = $(`<img class="icon-wrapper" src="${iconSrc}"/>`)
         $img.on('load', () => {
             const $removeClass = $('.site').find(`${'.' + simplifyUrl(iconSrc)}`)
             $removeClass.replaceWith($img)
         })
-        
-        // const $site = $('site')
-        // let event
-        // $site.on({
-        //     touchstart(e) {
-        //         event = e.target.lastChild
-        //         timeOutEvent = setTimeout(() => {
-        //             if (event){
-        //                 event.style.display = 'block'
-        //             }
-        //         }, 1000)
-        //     },
-        //     touchmove() {
-        //         clearTimeout(timeOutEvent)
-        //     }, 
-        // })
-        // $(document).on("click", () => {
-        //     if(event)event.style.display = 'none'
-        // });
+
         $li.on('click', () => {
-            window.open(node.url)
+          window.open(node.url)
+      })
+      $li.on('click', '.close', (e) => {
+          e.stopPropagation()
+          hash.splice(index, 1)
+          localStorage.setItem('hash', JSON.stringify(hash))
+          rander()
+      })
+        const $site = $('site')
+        let event
+        $site.on({
+            touchstart(e) {
+                event = e.target.lastChild
+                timeOutEvent = setTimeout(() => {
+                    if (event){
+                        event.style.display = 'block'
+                    }
+                }, 1000)
+            },
+            touchmove() {
+                clearTimeout(timeOutEvent)
+            }, 
         })
-        $li.on('click', '.close', (e) => {
-            e.stopPropagation()
-            hash.splice(index, 1)
-            localStorage.setItem('hash', JSON.stringify(hash))
-            rander()
-        })
+        $(document).on("click", () => {
+            if(event)event.style.display = 'none'
+        });
     })
 }
+
 window.onload=()=>{
     rander()
 }

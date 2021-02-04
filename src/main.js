@@ -34,16 +34,6 @@ const rander = () => {
             const $removeClass = $('.site').find(`${'.' + simplifyUrl(iconSrc)}`)
             $removeClass.replaceWith($img)
         })
-        $li.on('click', () => {
-            window.open(node.url)
-        })
-        $li.on('click', '.close', (e) => {
-            e.stopPropagation()
-            hash.splice(index, 1)
-            localStorage.setItem('hash', JSON.stringify(hash))
-            rander()
-        })
-
         let timeOutEvent
         const $site = $('.site')
         $site.on({
@@ -59,6 +49,17 @@ const rander = () => {
         $(document).on("click", () => {
             $li.find(".close").css("display", "none");
         });
+        $li.on('click', () => {
+            window.open(node.url)
+        })
+        $li.on('click', '.close', (e) => {
+            e.stopPropagation()
+            hash.splice(index, 1)
+            localStorage.setItem('hash', JSON.stringify(hash))
+            rander()
+        })
+
+        
     })
 }
 rander()

@@ -156,15 +156,6 @@ var rander = function rander() {
       var $removeClass = $('.site').find("".concat('.' + simplifyUrl(iconSrc)));
       $removeClass.replaceWith($img);
     });
-    $li.on('click', function () {
-      window.open(node.url);
-    });
-    $li.on('click', '.close', function (e) {
-      e.stopPropagation();
-      hash.splice(index, 1);
-      localStorage.setItem('hash', JSON.stringify(hash));
-      rander();
-    });
     var timeOutEvent;
     var $site = $('.site');
     $site.on({
@@ -179,6 +170,15 @@ var rander = function rander() {
     });
     $(document).on("click", function () {
       $li.find(".close").css("display", "none");
+    });
+    $li.on('click', function () {
+      window.open(node.url);
+    });
+    $li.on('click', '.close', function (e) {
+      e.stopPropagation();
+      hash.splice(index, 1);
+      localStorage.setItem('hash', JSON.stringify(hash));
+      rander();
     });
   });
 };
@@ -205,4 +205,4 @@ window.onbeforeunload = function () {
   localStorage.setItem('hash', JSON.stringify(hash));
 };
 },{}]},{},["epB2"], null)
-//# sourceMappingURL=main.6a5b0bb6.js.map
+//# sourceMappingURL=main.974f52f3.js.map

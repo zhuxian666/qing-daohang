@@ -140,7 +140,7 @@ body {
 }
 @media (max-width: 385px) {
     .siteList .site{
-        width: 100px;
+        width: 120px;
     }
 }
 .siteList .site .link {
@@ -170,7 +170,9 @@ body {
 }
 @media (min-width: 500px){
     .siteList .site:hover .close {
-        display: block;
+        display: block !important;
+    /*js的点击空白处pc不会出现删除按钮，加高权重*/
+
     }
 }
 

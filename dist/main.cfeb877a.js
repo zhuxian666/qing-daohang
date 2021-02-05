@@ -145,35 +145,35 @@ var simplifyUrl = function simplifyUrl(url) {
   return url.replace("https://", "").replace("http://", "").replace("www.", "").replace(/\/.*/, "").replace(".com", "");
 };
 
+var setStr = function setStr() {
+  localStorage.setItem("hash", JSON.stringify(hash));
+};
+
 var rander = function rander() {
   $siteList.find(".site:not(.last)").remove();
   hash.forEach(function (node, index) {
     var iconSrc = "".concat(node.url + "/favicon.ico");
     var $li = $("<li class=\"site\">\n            <div class=\"icon-wrapper\">".concat(node.logo, "</div>\n            <div class=\"link\">").concat(simplifyUrl(node.url), "</div>\n            <svg class=\"icon close\" aria-hidden=\"true\">\n            <use xlink:href=\"#icon-shanchu\"></use>\n        </svg></li>")).insertBefore($last);
-    $li.find('.icon-wrapper').addClass("".concat(simplifyUrl(node.url)));
+    $li.find(".icon-wrapper").addClass("".concat(simplifyUrl(node.url)));
     var $img = $("<img class=\"icon-wrapper\" src=\"".concat(iconSrc, "\"/>"));
-    $img.on('load', function () {
-      var $removeClass = $('.site').find("".concat('.' + simplifyUrl(iconSrc)));
+    $img.on("load", function () {
+      var $removeClass = $(".site").find("".concat("." + simplifyUrl(iconSrc)));
       $removeClass.replaceWith($img);
     });
-    $li.on('click', function () {
+    $li.on("click", function () {
       window.open(node.url);
     });
-    $li.on('click', '.close', function (e) {
+    $li.on("click", ".close", function (e) {
       e.stopPropagation();
       hash.splice(index, 1);
-      localStorage.setItem('hash', JSON.stringify(hash));
+      setStr();
       rander();
     });
-    var event;
+    var timeOutEvent;
     $li.on({
-      touchstart: function touchstart(e) {
-        console.log(1);
-        event = e.target.lastChild;
+      touchstart: function touchstart() {
         timeOutEvent = setTimeout(function () {
-          if (event) {
-            event.style.display = 'block';
-          }
+          $li.find(".close").css("display", "block");
         }, 800);
       },
       touchmove: function touchmove() {
@@ -181,20 +181,17 @@ var rander = function rander() {
       }
     });
     $(document).on("click", function () {
-      if (event) event.style.display = 'none';
+      $li.find(".close").css("display", "none");
     });
   });
 };
 
-window.onload = function () {
-  rander();
-};
+rander();
+$(".addButton").on("click", function () {
+  var url = window.prompt("请输入要添加的网址");
 
-$('.addButton').on('click', function () {
-  var url = window.prompt('请输入要添加的网址');
-
-  if (url && url.indexOf('http') !== 0) {
-    url = 'https://' + url;
+  if (url && url.indexOf("http") !== 0) {
+    url = "https://" + url;
   }
 
   if (url) {
@@ -202,13 +199,13 @@ $('.addButton').on('click', function () {
       logo: simplifyUrl(url)[0].toUpperCase(),
       url: url
     });
-    localStorage.setItem('hash', JSON.stringify(hash));
+    setStr();
     rander();
   }
 });
 
 window.onbeforeunload = function () {
-  localStorage.setItem("hash", JSON.stringify(hash));
+  setStr();
 };
 },{}]},{},["epB2"], null)
-//# sourceMappingURL=main.1938ec31.js.map
+//# sourceMappingURL=main.cfeb877a.js.map

@@ -17,6 +17,9 @@ const simplifyUrl = (url) => {
     .replace(/\/.*/, "")
     .replace(".com", "");
 };
+const setStr = () => {
+  localStorage.setItem("hash", JSON.stringify(hash));
+};
 const rander = () => {
   $siteList.find(".site:not(.last)").remove();
   hash.forEach((node, index) => {
@@ -26,63 +29,54 @@ const rander = () => {
             <div class="link">${simplifyUrl(node.url)}</div>
             <svg class="icon close" aria-hidden="true">
             <use xlink:href="#icon-shanchu"></use>
-        </svg></li>`)
-            .insertBefore($last)
-        $li.find('.icon-wrapper').addClass(`${simplifyUrl(node.url)}`)
-        const $img = $(`<img class="icon-wrapper" src="${iconSrc}"/>`)
-        $img.on('load', () => {
-            const $removeClass = $('.site').find(`${'.' + simplifyUrl(iconSrc)}`)
-            $removeClass.replaceWith($img)
-        })
+        </svg></li>`).insertBefore($last);
+    $li.find(".icon-wrapper").addClass(`${simplifyUrl(node.url)}`);
+    const $img = $(`<img class="icon-wrapper" src="${iconSrc}"/>`);
+    $img.on("load", () => {
+      const $removeClass = $(".site").find(`${"." + simplifyUrl(iconSrc)}`);
+      $removeClass.replaceWith($img);
+    });
 
-        $li.on('click', () => {
-          window.open(node.url)
-      })
-      $li.on('click', '.close', (e) => {
-          e.stopPropagation()
-          hash.splice(index, 1)
-          localStorage.setItem('hash', JSON.stringify(hash))
-          rander()
-      })
-        let event
-        $li.on({
-            touchstart(e) {
-                console.log(1);
-                event = e.target.lastChild
-                timeOutEvent = setTimeout(() => {
-                    if (event){
-                        event.style.display = 'block'
-                    }
-                }, 800)
-            },
-            touchmove() {
-                clearTimeout(timeOutEvent)
-            }, 
-        })
-        $(document).on("click", () => {
-            if(event)event.style.display = 'none'
-        });
-    })
-}
-
-window.onload=()=>{
-    rander()
-}
-$('.addButton').on('click', () => {
-    let url = window.prompt('请输入要添加的网址')
-    if (url && url.indexOf('http') !== 0) {
-        url = 'https://' + url
-    }
-    if (url) {
-        hash.push({
-            logo: simplifyUrl(url)[0].toUpperCase(),
-            url: url
-        })
-        localStorage.setItem('hash', JSON.stringify(hash))
-        rander()
-    }
-})
-
+    $li.on("click", () => {
+      window.open(node.url);
+    });
+    $li.on("click", ".close", (e) => {
+      e.stopPropagation();
+      hash.splice(index, 1);
+      setStr();
+      rander();
+    });
+    let timeOutEvent;
+    $li.on({
+      touchstart() {
+        timeOutEvent = setTimeout(() => {
+          $li.find(".close").css("display", "block");
+        }, 800);
+      },
+      touchmove() {
+        clearTimeout(timeOutEvent);
+      },
+    });
+    $(document).on("click", () => {
+      $li.find(".close").css("display", "none");
+    });
+  });
+};
+rander();
+$(".addButton").on("click", () => {
+  let url = window.prompt("请输入要添加的网址");
+  if (url && url.indexOf("http") !== 0) {
+    url = "https://" + url;
+  }
+  if (url) {
+    hash.push({
+      logo: simplifyUrl(url)[0].toUpperCase(),
+      url: url,
+    });
+    setStr();
+    rander();
+  }
+});
 window.onbeforeunload = () => {
-  localStorage.setItem("hash", JSON.stringify(hash));
+  setStr();
 };

@@ -36,7 +36,6 @@ const rander = () => {
       const $removeClass = $(".site").find(`${"." + simplifyUrl(iconSrc)}`);
       $removeClass.replaceWith($img);
     });
-
     $li.on("click", () => {
       window.open(node.url);
     });

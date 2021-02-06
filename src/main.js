@@ -14,16 +14,22 @@ const simplifyUrl = (url) => {
     .replace("https://", "")
     .replace("http://", "")
     .replace("www.", "")
-    .replace(/\/.*/, "")
-    .replace(".com", "");
+    .replace(/\..*/, "")
 };
+const findIcon = (url)=>{
+  return 'https://' + url
+    .replace("https://", "")
+    .replace("http://", "")
+    .replace(/\/.*/, "")
+       + "/favicon.ico"
+}
 const setStr = () => {
   localStorage.setItem("hash", JSON.stringify(hash));
 };
 const rander = () => {
   $siteList.find(".site:not(.last)").remove();
   hash.forEach((node, index) => {
-    let iconSrc = `${node.url + "/favicon.ico"}`;
+    console.log(findIcon(node.url));
     const $li = $(`<li class="site">
             <div class="icon-wrapper">${node.logo}</div>
             <div class="link">${simplifyUrl(node.url)}</div>
@@ -31,9 +37,9 @@ const rander = () => {
             <use xlink:href="#icon-shanchu"></use>
         </svg></li>`).insertBefore($last);
     $li.find(".icon-wrapper").addClass(`${simplifyUrl(node.url)}`);
-    const $img = $(`<img class="icon-wrapper" src="${iconSrc}"/>`);
+    const $img = $(`<img class="icon-wrapper" src="${findIcon(node.url)}"/>`);
     $img.on("load", () => {
-      const $removeClass = $(".site").find(`${"." + simplifyUrl(iconSrc)}`);
+      const $removeClass = $(".site").find(`${"." + simplifyUrl(node.url)}`);
       $removeClass.replaceWith($img);
     });
     $li.on("click", () => {

@@ -166,7 +166,7 @@ body {
     right: 5px;
     top: 5px;
     display: none;
-    cursor: default;
+    cursor: pointer;
 }
 @media (min-width: 500px){
     .siteList .site:hover .close {
@@ -287,4 +287,4 @@ body {
 
 
 
-/*# sourceMappingURL=style.8e2fb5fe.css.map */
+/*# sourceMappingURL=style.ce5c4cd7.css.map */

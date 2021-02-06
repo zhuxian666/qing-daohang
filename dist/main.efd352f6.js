@@ -142,7 +142,11 @@ var hash = getStr || [{
 }];
 
 var simplifyUrl = function simplifyUrl(url) {
-  return url.replace("https://", "").replace("http://", "").replace("www.", "").replace(/\/.*/, "").replace(".com", "");
+  return url.replace("https://", "").replace("http://", "").replace("www.", "").replace(/\..*/, "");
+};
+
+var findIcon = function findIcon(url) {
+  return 'https://' + url.replace("https://", "").replace("http://", "").replace(/\/.*/, "") + "/favicon.ico";
 };
 
 var setStr = function setStr() {
@@ -152,12 +156,12 @@ var setStr = function setStr() {
 var rander = function rander() {
   $siteList.find(".site:not(.last)").remove();
   hash.forEach(function (node, index) {
-    var iconSrc = "".concat(node.url + "/favicon.ico");
+    console.log(findIcon(node.url));
     var $li = $("<li class=\"site\">\n            <div class=\"icon-wrapper\">".concat(node.logo, "</div>\n            <div class=\"link\">").concat(simplifyUrl(node.url), "</div>\n            <svg class=\"icon close\" aria-hidden=\"true\">\n            <use xlink:href=\"#icon-shanchu\"></use>\n        </svg></li>")).insertBefore($last);
     $li.find(".icon-wrapper").addClass("".concat(simplifyUrl(node.url)));
-    var $img = $("<img class=\"icon-wrapper\" src=\"".concat(iconSrc, "\"/>"));
+    var $img = $("<img class=\"icon-wrapper\" src=\"".concat(findIcon(node.url), "\"/>"));
     $img.on("load", function () {
-      var $removeClass = $(".site").find("".concat("." + simplifyUrl(iconSrc)));
+      var $removeClass = $(".site").find("".concat("." + simplifyUrl(node.url)));
       $removeClass.replaceWith($img);
     });
     $li.on("click", function () {
@@ -208,4 +212,4 @@ window.onbeforeunload = function () {
   setStr();
 };
 },{}]},{},["epB2"], null)
-//# sourceMappingURL=main.4ea26777.js.map
+//# sourceMappingURL=main.efd352f6.js.map

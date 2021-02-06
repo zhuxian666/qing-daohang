@@ -166,7 +166,7 @@ body {
     right: 5px;
     top: 5px;
     display: none;
-    cursor: default;
+    cursor: pointer;
 }
 @media (min-width: 500px){
     .siteList .site:hover .close {
